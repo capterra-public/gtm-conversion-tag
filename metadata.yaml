@@ -1,5 +1,5 @@
 homepage: "https://www.gartner.com/en/digital-markets"
 documentation: ""
 versions:
-  - sha: 
+  - sha: a9c47e4ed46683d135861c4364dc41efc0acdd60
     changeNotes: Initial release
