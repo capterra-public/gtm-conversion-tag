@@ -1,5 +1,5 @@
 homepage: "https://www.gartner.com/en/digital-markets"
 documentation: "https://assets.ctfassets.net/oxxd3vmipgr7/2FfmTssCxRb9ZCwsZLMJaH/87ddbe3c9ebade0d5f6446bda32075c4/GDM__GTM_Documentation_Insights_Tag_Install_Guide.docx__2_.pdf"
 versions:
-  - sha: a9c47e4ed46683d135861c4364dc41efc0acdd60
-    changeNotes: Initial release
+  - sha: 77f62d2bae0d47785623a89ad6c8319d8821bfca
+    changeNotes: Update documentation
