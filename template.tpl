@@ -29,53 +29,24 @@ ___INFO___
 
 ___TEMPLATE_PARAMETERS___
 
-[
-  {
-    "type": "TEXT",
-    "name": "campaignId",
-    "displayName": "Campaign Id",
-    "simpleValueType": true,
-    "valueValidators": [
-      {
-        "type": "NON_EMPTY"
-      }
-    ]
-  },
-  {
-    "type": "TEXT",
-    "name": "campaignKey",
-    "displayName": "Campaign Key",
-    "simpleValueType": true,
-    "valueValidators": [
-      {
-        "type": "NON_EMPTY"
-      }
-    ]
-  },
-  {
-    "type": "TEXT",
-    "name": "productId",
-    "displayName": "Product Id",
-    "simpleValueType": true,
-    "valueValidators": [
-      {
-        "type": "NON_EMPTY"
-      }
-    ]
-  }
-]
+{
+  "type": "TEXT",
+  "name": "installationId",
+  "displayName": "Installation Id",
+  "simpleValueType": true,
+  "valueValidators": [
+    {
+      "type": "NON_EMPTY"
+    }
+  ]
+}
 
 
 ___SANDBOXED_JS_FOR_WEB_TEMPLATE___
 
-const callInWindow = require('callInWindow');
-const makeInteger = require('makeInteger');
-
-if(data.campaignId && data.campaignKey && data.productId) {
+if(data.installationId) {
   callInWindow('ct.sendEvent', {
-      campaignKey: data.campaignKey,
-      campaignId: makeInteger(data.campaignId),
-      productId: data.productId
+      installationId: data.installationId,
     });
   
   data.gtmOnSuccess();
@@ -154,39 +125,9 @@ ___WEB_PERMISSIONS___
 ___TESTS___
 
 scenarios:
-- name: Missing Campaign Id
+- name: Missing installation Id
   code: |-
-    const mockData = {
-      // Mocked field values
-      campaignKey: "testKey",
-      productId: "testProduct"
-    };
-
-    // Call runCode to run the template's code.
-    runCode(mockData);
-
-    // Verify that the tag finished successfully.
-    assertApi('gtmOnFailure').wasCalled();
-- name: Missing Campaign Key
-  code: |-
-    const mockData = {
-      // Mocked field values
-      campaignId: "testId",
-      productId: "testProduct"
-    };
-
-    // Call runCode to run the template's code.
-    runCode(mockData);
-
-    // Verify that the tag finished successfully.
-    assertApi('gtmOnFailure').wasCalled();
-- name: Missing Product Id
-  code: |-
-    const mockData = {
-      // Mocked field values
-      campaignId: "testId",
-      campaignKey: "testKey",
-    };
+    const mockData = {};
 
     // Call runCode to run the template's code.
     runCode(mockData);
@@ -196,9 +137,7 @@ scenarios:
 - name: Success send event
   code: |-
     const mockData = {
-      productId: "testProduct",
-      campaignId: "testId",
-      campaignKey: "testKey",
+      installationId: "test-id",
     };
 
     // Call runCode to run the template's code.
@@ -206,9 +145,7 @@ scenarios:
 
     // Verify that the tag finished successfully.
     assertApi('callInWindow').wasCalledWith('ct.sendEvent', {
-      productId: "testProduct",
-      campaignId: "testId",
-      campaignKey: "testKey",
+      installationId: "test-id",
       });
     assertApi('gtmOnSuccess').wasCalled();
 setup: ''
