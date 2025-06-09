@@ -1,6 +1,8 @@
 homepage: "https://www.gartner.com/en/digital-markets"
 documentation: "https://assets.ctfassets.net/oxxd3vmipgr7/2FfmTssCxRb9ZCwsZLMJaH/87ddbe3c9ebade0d5f6446bda32075c4/GDM__GTM_Documentation_Insights_Tag_Install_Guide.docx__2_.pdf"
 versions:
+  - sha: 540febbf947b6da784fb9bd9bf7b0c47f228c132
+    changeNotes: Updated template version
   - sha: 4f0febe77ec21f1b21d5c21ea9a88534009a98c5
     changeNotes: Add Installation Id, Remove Campaign and Product fields
   - sha: fa7bed114eb5cc63090e21a4338f24c1dd1bc480
