@@ -11,7 +11,7 @@ ___INFO___
 {
   "type": "TAG",
   "id": "cvt_temp_public_id",
-  "version": 2,
+  "version": 3,
   "securityGroups": [],
   "displayName": "Gartner Digital Markets Conversion Tag",
   "categories": ["CONVERSIONS"],
@@ -44,11 +44,14 @@ ___TEMPLATE_PARAMETERS___
 
 ___SANDBOXED_JS_FOR_WEB_TEMPLATE___
 
-if(data.installationId) {
-  callInWindow('ct.sendEvent', {
-      installationId: data.installationId,
-    });
-  
+const copyFromWindow = require('copyFromWindow');
+const setInWindow = require('setInWindow');
+
+if(data.installationId) {  
+  let gdmEvents = copyFromWindow('gdmEvents') || [];
+  gdmEvents.push(data.installationId);
+  setInWindow('gdmEvents', gdmEvents, true);
+
   data.gtmOnSuccess();
 } else {
   data.gtmOnFailure();
@@ -93,7 +96,11 @@ ___WEB_PERMISSIONS___
                 "mapValue": [
                   {
                     "type": 1,
-                    "string": "ct.sendEvent"
+                    "string": "gdmEvents"
+                  },
+                  {
+                    "type": 8,
+                    "boolean": true
                   },
                   {
                     "type": 8,
@@ -102,10 +109,6 @@ ___WEB_PERMISSIONS___
                   {
                     "type": 8,
                     "boolean": false
-                  },
-                  {
-                    "type": 8,
-                    "boolean": true
                   }
                 ]
               }
@@ -144,9 +147,8 @@ scenarios:
     runCode(mockData);
 
     // Verify that the tag finished successfully.
-    assertApi('callInWindow').wasCalledWith('ct.sendEvent', {
-      installationId: "test-id",
-      });
+    assertApi('copyFromWindow').wasCalledWith('gdmEvents');
+    assertApi('setInWindow').wasCalledWith('gdmEvents', ['test-id'], true);
     assertApi('gtmOnSuccess').wasCalled();
 setup: ''
 
