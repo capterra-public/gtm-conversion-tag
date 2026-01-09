@@ -44,14 +44,12 @@ ___TEMPLATE_PARAMETERS___
 
 ___SANDBOXED_JS_FOR_WEB_TEMPLATE___
 
-const copyFromWindow = require('copyFromWindow');
-const setInWindow = require('setInWindow');
+const createQueue = require('createQueue');
 
-if(data.installationId) {  
-  let gdmEvents = copyFromWindow('gdmEvents') || [];
-  gdmEvents.push(data.installationId);
-  setInWindow('gdmEvents', gdmEvents, true);
-
+if (data.installationId) {
+  const pushGdmEvent = createQueue('gdmEvents');
+  pushGdmEvent(data.installationId);
+  
   data.gtmOnSuccess();
 } else {
   data.gtmOnFailure();
@@ -108,7 +106,7 @@ ___WEB_PERMISSIONS___
                   },
                   {
                     "type": 8,
-                    "boolean": false
+                    "boolean": true
                   }
                 ]
               }
@@ -123,6 +121,7 @@ ___WEB_PERMISSIONS___
     "isRequired": true
   }
 ]
+
 
 
 ___TESTS___
@@ -147,9 +146,13 @@ scenarios:
     runCode(mockData);
 
     // Verify that the tag finished successfully.
-    assertApi('copyFromWindow').wasCalledWith('gdmEvents');
-    assertApi('setInWindow').wasCalledWith('gdmEvents', ['test-id'], true);
+    assertApi('createQueue').wasCalledWith('gdmEvents');
     assertApi('gtmOnSuccess').wasCalled();
+- name: Success push
+  code: "const mockData = {\n  installationId: 'test_123'\n};\n\nmock('createQueue',\
+    \ function(queueName) {\n  assertThat(queueName).isEqualTo('gdmEvents');\n  \n\
+    \  return function(pushedValue) {\n    assertThat(pushedValue).isEqualTo('test_123');\n\
+    \  };\n});\n\nrunCode(mockData);\nassertApi('gtmOnSuccess').wasCalled();"
 setup: ''
 
 
