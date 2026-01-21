@@ -3,7 +3,7 @@ ___INFO___
 {
   "type": "TAG",
   "id": "cvt_temp_public_id",
-  "version": 3,
+  "version": 1,
   "securityGroups": [],
   "displayName": "Gartner Digital Markets Conversion Tag",
   "categories": [
