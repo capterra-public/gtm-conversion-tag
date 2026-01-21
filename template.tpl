@@ -1,11 +1,3 @@
-﻿___TERMS_OF_SERVICE___
-
-By creating or modifying this file you agree to Google Tag Manager's Community
-Template Gallery Developer Terms of Service available at
-https://developers.google.com/tag-manager/gallery-tos (or such other URL as
-Google may provide), as modified from time to time.
-
-
 ___INFO___
 
 {
@@ -14,7 +6,9 @@ ___INFO___
   "version": 3,
   "securityGroups": [],
   "displayName": "Gartner Digital Markets Conversion Tag",
-  "categories": ["CONVERSIONS"],
+  "categories": [
+    "CONVERSIONS"
+  ],
   "brand": {
     "id": "brand_dummy",
     "displayName": "",
@@ -29,17 +23,19 @@ ___INFO___
 
 ___TEMPLATE_PARAMETERS___
 
-{
-  "type": "TEXT",
-  "name": "installationId",
-  "displayName": "Installation Id",
-  "simpleValueType": true,
-  "valueValidators": [
-    {
-      "type": "NON_EMPTY"
-    }
-  ]
-}
+[
+  {
+    "type": "TEXT",
+    "name": "installationId",
+    "displayName": "Installation Id",
+    "simpleValueType": true,
+    "valueValidators": [
+      {
+        "type": "NON_EMPTY"
+      }
+    ]
+  }
+]
 
 
 ___SANDBOXED_JS_FOR_WEB_TEMPLATE___
@@ -123,7 +119,6 @@ ___WEB_PERMISSIONS___
 ]
 
 
-
 ___TESTS___
 
 scenarios:
@@ -159,5 +154,3 @@ setup: ''
 ___NOTES___
 
 Created on 23/01/2025, 15:37:25
-
-
