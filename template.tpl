@@ -35,7 +35,7 @@ ___TEMPLATE_PARAMETERS___
   {
     "type": "TEXT",
     "name": "installationId",
-    "displayName": "Installation Id",
+    "displayName": "Conversion Name",
     "simpleValueType": true,
     "valueValidators": [
       {
